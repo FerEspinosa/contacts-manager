@@ -1,5 +1,6 @@
 package com.curso.android.app.practica.contactsmanagerapp;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,7 +17,7 @@ public interface ContactDAO {
     @Delete
     void delete (Contacts Contact);
 
+    // This was modified to return a LiveData object
     @Query ("SELECT * FROM contacts_table")
-    List<Contacts> getAllContacts();
-
+    LiveData<List<Contacts>> getAllContacts();
 }
