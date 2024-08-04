@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -20,7 +19,7 @@ import java.util.concurrent.Executors;
 
     Handler handler;
 
-    public Repository(Application application, ContactDAO contactDAO) {
+    public Repository(Application application) {
 
         ContactDatabase contactDatabase = ContactDatabase.getInstance(application);
         this.contactDAO = contactDatabase.getContactDao();
@@ -35,7 +34,7 @@ import java.util.concurrent.Executors;
 
     // Methods in the ContactDAO
 
-        public void insert (Contacts contact) {
+        public void addContact(Contacts contact) {
 
         /*  Next line would be executed in the UI thread
             contactDAO.insert(contact);

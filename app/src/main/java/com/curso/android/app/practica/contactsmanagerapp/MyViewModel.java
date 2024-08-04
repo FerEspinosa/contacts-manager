@@ -25,8 +25,8 @@ public class MyViewModel extends AndroidViewModel {
         return allContacts;
     }
 
-    public void insert(Contacts contacts) {
-        myRepository.insert(contacts);
+    public void addNewContact(Contacts contacts) {
+        myRepository.addContact(contacts);
     }
 
     public void delete(Contacts contacts) {
