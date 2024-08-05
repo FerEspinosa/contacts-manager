@@ -24,12 +24,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactViewHolder>
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // creating new View holders for items in recyclerView
-        ContactListItemBinding contactListItemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.contact_list_item,
-                parent,
-                false
-        );
+        ContactListItemBinding contactListItemBinding =
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.getContext()),
+                    R.layout.contact_list_item,
+                    parent,
+                    false
+                );
 
         return new ContactViewHolder(contactListItemBinding);
     }

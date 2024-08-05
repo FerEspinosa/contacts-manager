@@ -15,9 +15,9 @@ public class MyViewModel extends AndroidViewModel {
     // LiveData
     private LiveData<List<Contacts>> allContacts;
 
-    public MyViewModel(@NonNull Application application, Repository myRepository) {
+    public MyViewModel(@NonNull Application application) {
         super(application);
-        this.myRepository = myRepository;
+        this.myRepository = new Repository(application);
     }
 
     public LiveData<List<Contacts>> getAllContacts() {

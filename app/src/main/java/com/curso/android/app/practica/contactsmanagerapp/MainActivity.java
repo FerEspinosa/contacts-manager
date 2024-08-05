@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Data source
     private ContactDatabase contactDatabase;
-    private ArrayList<Contacts> contacts = new ArrayList<>();
+    private ArrayList<Contacts> contactsArrayList = new ArrayList<>();
 
     // Adapter
     private MyAdapter myAdapter;
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
     private MainActivityClickHandler handlers;
 
+    // View model
+    MyViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,20 +55,16 @@ public class MainActivity extends AppCompatActivity {
             handlers = new MainActivityClickHandler(this);
             mainBinding.setClickHandler(handlers);
 
-
         // RecyclerView
         RecyclerView recyclerView = mainBinding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        // Initialize (and set) adapter
-        myAdapter = new MyAdapter(contacts);
-
         // Initialize database
         contactDatabase = ContactDatabase.getInstance(this);
 
         // View model
-        MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
         // Insert a new Contact (just for testing, later on we will create an activity to insert data)
         Contacts c1 = new Contacts("Pablo Ramirez", "p.ramirez@mail.com");
@@ -78,11 +76,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onChanged(List<Contacts> contacts) {
                         for (Contacts c : contacts) {
                             Log.v("TAGY", c.getName());
-                            contacts.add(c);
+                            contactsArrayList.add(c);
                         }
                         myAdapter.notifyDataSetChanged();
                     }
                 });
+
+        // Initialize (and set) adapter
+        myAdapter = new MyAdapter(contactsArrayList);
 
         // linking adapter to recycler view
         recyclerView.setAdapter(myAdapter);
