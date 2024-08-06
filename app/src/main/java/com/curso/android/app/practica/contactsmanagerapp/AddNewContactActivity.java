@@ -7,8 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.curso.android.app.practica.contactsmanagerapp.databinding.ActivityAddNewContactBinding;
 
 public class AddNewContactActivity extends AppCompatActivity {
+
+    private ActivityAddNewContactBinding binding;
+    private AddNewContactClickHandler handler;
+    private Contacts contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +28,19 @@ public class AddNewContactActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        contact = new Contacts();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_contact);
+
+        MyViewModel myViewModel = new ViewModelProvider(this)
+                .get(MyViewModel.class);
+
+        handler = new AddNewContactClickHandler(contact, this, myViewModel);
+
+        binding.setContact(contact);
+        binding.setClickHandler(handler);
+
+
+
     }
 }

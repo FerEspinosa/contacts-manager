@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
         // View model
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
-        // Insert a new Contact (just for testing, later on we will create an activity to insert data)
-        Contacts c1 = new Contacts("Pablo Ramirez", "p.ramirez@mail.com");
-        viewModel.addNewContact(c1);
 
         // Loading Data from ROOM DB
         viewModel.getAllContacts().observe(this, new Observer<List<Contacts>>() {
